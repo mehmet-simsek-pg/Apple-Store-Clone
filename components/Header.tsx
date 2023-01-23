@@ -14,10 +14,10 @@ function Header() {
   const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
   return (
-    <header className="sticky top-0 z-30 flex w-full items-center justify-between bg-[#E7ECEE] p-4">
-      <div className="flex items-center justify-center md:w-1/5">
+    <header className="app__header_wrapper">
+      <div className="app__header">
         <Link href="/">
-          <div className="relative h-10 w-5 cursor-pointer opacity-75 transition hover:opacity-100">
+          <div className="app__header-logo">
             <Image
               src="https://rb.gy/vsvv2o"
               fill
@@ -27,20 +27,18 @@ function Header() {
           </div>
         </Link>
       </div>
-      <div className="hidden flex-1 items-center justify-center space-x-8 md:flex">
+      <div className="app__header-links">
         <a className="headerLink">Product</a>
         <a className="headerLink">Explore</a>
         <a className="headerLink">Support</a>
         <a className="headerLink">Business</a>
       </div>
-      <div className="flex items-center justify-center gap-x-4 md:w-1/5">
+      <div className="headerIcons">
         <MagnifyingGlassIcon className="headerIcon" />
         <Link href="/checkout">
           <div className="relative cursor-pointer">
             {items.length > 0 && (
-              <span className="absolute -right-1 -top-1 z-50 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 text-[10px] text-white">
-                {items.length}
-              </span>
+              <span className="shoppingBagCount">{items.length}</span>
             )}
             <ShoppingBagIcon className="headerIcon" />
           </div>
@@ -48,10 +46,7 @@ function Header() {
 
         {session ? (
           <Image
-            src={
-              session.user?.image ||
-              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-            }
+            src={session.user?.image || "../../assets/profile_image"}
             alt=""
             className="cursor-pointer rounded-full"
             width={34}
